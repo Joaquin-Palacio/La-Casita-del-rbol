@@ -14,7 +14,7 @@ export const ItemList = ({ productos }) => {
 ItemList.propTypes = {
   productos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       nombre: PropTypes.string.isRequired,
       precio: PropTypes.number.isRequired,
       img: PropTypes.string.isRequired,

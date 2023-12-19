@@ -12,7 +12,7 @@ export const Item = ({nombre, precio, img }) => {
 };
 
 Item.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   nombre: PropTypes.string.isRequired,
   precio: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
