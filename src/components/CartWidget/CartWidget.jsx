@@ -1,11 +1,12 @@
+import { Nav } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import "./CartWidget.css";
 
 export const CartWidget = () => {
   return (
-    <div>
+    <Nav.Link>
       <FaShoppingCart className="cartIcon" />
       <strong>2</strong>
-    </div>
+    </Nav.Link>
   );
 };

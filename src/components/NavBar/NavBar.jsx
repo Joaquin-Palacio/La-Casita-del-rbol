@@ -1,29 +1,31 @@
-import { CartWidget } from "../CartWidget/CartWidget";
 import { Link, NavLink } from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import { CartWidget } from "../CartWidget/CartWidget";
 import "./NavBar.css";
 
 export const NavBar = () => {
   return (
-    <header>
-      <Link to="/">
-        <h1>Loli-Shop</h1>
-      </Link>
-
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="categoria/1" > Hombres </NavLink>
-          </li>
-          <li>
-            <NavLink to="categoria/2"> Mujeres </NavLink>
-          </li>
-          <li>
-            <NavLink to="categoria/3"> Niños </NavLink>
-          </li>
-        </ul>
-      </nav>
-
-      <CartWidget />
-    </header>
+    <Navbar expand="lg" bg="dark" className="bg-body-tertiary">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
+          Loli-Shop
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/categoria/camisetas">
+              Camisetas
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/categoria/camperas">
+              Camperas
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/categoria/pantalones">
+              Pantalones
+            </Nav.Link>
+          </Nav>
+          <CartWidget />
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
