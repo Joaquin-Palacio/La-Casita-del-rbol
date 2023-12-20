@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-export const Item = ({nombre, precio, img }) => {
+export const Item = ({id, nombre, precio, img }) => {
   return (
     <div>
       <img src={img} alt="imagen producto" />
       <h3>{nombre}</h3>
       <p>${precio}</p>
-      <button>Ver Detalles</button>
+      <Link to={`/item/${id}`}>Ver Detalles</Link>
     </div>
   );
 };
