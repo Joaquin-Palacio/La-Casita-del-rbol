@@ -8,7 +8,7 @@ export const NavBar = () => {
     <Navbar expand="lg" bg="dark" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Loli-Shop
+          River-Shop
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

@@ -1,14 +1,20 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Card, Button } from "react-bootstrap";
+import './Item.css';
 
-export const Item = ({id, nombre, precio, img }) => {
+export const Item = ({ id, nombre, precio, img }) => {
   return (
-    <div>
-      <img src={img} alt="imagen producto" />
-      <h3>{nombre}</h3>
-      <p>${precio}</p>
-      <Link to={`/item/${id}`}>Ver Detalles</Link>
-    </div>
+    <Card className="text-center cardItem">
+      <Card.Img variant="top" src={img} alt="imagen producto" />
+      <Card.Body>
+        <Card.Title>{nombre}</Card.Title>
+        <Card.Text>${precio}</Card.Text>
+        <Button as={Link} to={`/item/${id}`} variant="primary">
+          Ver Detalles
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 

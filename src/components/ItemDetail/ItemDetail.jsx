@@ -1,16 +1,27 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Card } from "react-bootstrap";
+import './ItemDetail.css';
 
 export const ItemDetail = ({ nombre, img, precio }) => {
   return (
-    <div>
-      <h3>{nombre}</h3>
-      <img src={img} alt={nombre} />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam possimus
-        porro dicta deleniti odit, iste quas labore ea optio quae aspernatur
-        fugit quisquam? Iste modi, vel distinctio rem explicabo maxime.
-      </p>
-      <p>{precio}</p>
-    </div>
+    <Card className="text-center cardDetail">
+      <Card.Body>
+        <Card.Title>{nombre}</Card.Title>
+        <Card.Img src={img} alt={nombre} />
+        <Card.Text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+          possimus porro dicta deleniti odit, iste quas labore ea optio quae
+          aspernatur fugit quisquam? Iste modi, vel distinctio rem explicabo
+          maxime.
+        </Card.Text>
+        <Card.Text>${precio}</Card.Text>
+      </Card.Body>
+    </Card>
   );
+};
+
+ItemDetail.propTypes = {
+  nombre: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
 };
