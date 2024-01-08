@@ -1,8 +1,17 @@
-import PropTypes from "prop-types";
+import { useState } from "react";
 import { Card } from "react-bootstrap";
-import './ItemDetail.css';
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { ItemCount } from "../ItemCount/ItemCount";
+import "./ItemDetail.css";
 
-export const ItemDetail = ({ nombre, img, precio }) => {
+export const ItemDetail = ({ nombre, img, precio, stock }) => {
+  const [addCantidad, setAddCantidad] = useState(0);
+
+  const handleCantidad = (cantidad) => {
+    setAddCantidad(cantidad);
+  };
+
   return (
     <Card className="text-center cardDetail">
       <Card.Body>
@@ -16,6 +25,11 @@ export const ItemDetail = ({ nombre, img, precio }) => {
         </Card.Text>
         <Card.Text>${precio}</Card.Text>
       </Card.Body>
+      {addCantidad > 0 ? (
+        <Link to="/cart">Terminar compra</Link>
+      ) : (
+        <ItemCount valorInicial={1} stock={stock} addCarrito={handleCantidad} />
+      )}
     </Card>
   );
 };
@@ -24,4 +38,5 @@ ItemDetail.propTypes = {
   nombre: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   precio: PropTypes.number.isRequired,
+  stock: PropTypes.number.isRequired,
 };
