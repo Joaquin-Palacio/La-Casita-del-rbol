@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ItemCount } from "../ItemCount/ItemCount";
+import { CartContext } from '../../context/CartContext';
 import "./ItemDetail.css";
 
-export const ItemDetail = ({ nombre, img, precio, stock }) => {
+export const ItemDetail = ({ id, nombre, img, precio, stock }) => {
   const [addCantidad, setAddCantidad] = useState(0);
+
+  const { addItem } = useContext(CartContext);
 
   const handleCantidad = (cantidad) => {
     setAddCantidad(cantidad);
+
+    const item = { id, nombre, precio };
+    addItem(item, cantidad);
   };
 
   return (
@@ -23,6 +29,9 @@ export const ItemDetail = ({ nombre, img, precio, stock }) => {
           aspernatur fugit quisquam? Iste modi, vel distinctio rem explicabo
           maxime.
         </Card.Text>
+        <Card.Text>
+          Unidades Disponibles: {stock}
+        </Card.Text>
         <Card.Text>${precio}</Card.Text>
       </Card.Body>
       {addCantidad > 0 ? (
@@ -34,7 +43,8 @@ export const ItemDetail = ({ nombre, img, precio, stock }) => {
   );
 };
 
-ItemDetail.propTypes = {
+ItemDetail.propTypes = { 
+  id: PropTypes.string.isRequired,
   nombre: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   precio: PropTypes.number.isRequired,
