@@ -21,17 +21,17 @@ export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
     <Container>
       <Row>
         <InputGroup className="justify-content-center">
-          <Button variant="outline-danger" onClick={handleResta}>
+          <Button variant="outline-primary" onClick={handleResta}>
             -
           </Button>
           <InputGroup.Text>{contador}</InputGroup.Text>
-          <Button variant="outline-success" onClick={handleSuma}>
+          <Button variant="outline-primary" onClick={handleSuma}>
             +
           </Button>
         </InputGroup>
       </Row>
       <Row className="justify-content-center mt-4 mb-2">
-        <Button className="p-1 w-25" variant="primary" onClick={() => addCarrito(contador)}>
+        <Button className="p-1 w-25" variant="success" onClick={() => addCarrito(contador)}>
           Agregar al Carrito
         </Button>
       </Row>
