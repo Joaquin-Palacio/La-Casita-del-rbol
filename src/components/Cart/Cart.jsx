@@ -12,10 +12,10 @@ export const Cart = () => {
   if (cantidadTotal === 0) {
     return (
       // Mostramos un mensaje si no hay productos
-      <Card>
+      <Card className="container text-center mt-5">
         <Card.Body>
           <Card.Title>Todavía no hay productos en el carrito</Card.Title>
-          <Link to="/" className="btn btn-primary">
+          <Link to="/" className="btn btn-primary mt-4">
             Ver Productos
           </Link>
         </Card.Body>
@@ -25,12 +25,16 @@ export const Cart = () => {
 
   // Si hay productos en el carrito, mostramos la lista y detalles del carrito
   return (
-    <Card>
+    <Card className="container text-center mt-5">
       <Card.Body>
-        {/* Mapeamos los productos en el carrito y renderizamos el componente CartItem */}
-        {carrito.map((producto) => (
-          <CartItem key={producto.item.id} {...producto} />
-        ))}
+        <div className="row">
+          {/* Mapeamos los productos en el carrito y renderizamos el componente CartItem */}
+          {carrito.map((producto) => (
+            <div key={producto.item.id} className="col m-1">
+            <CartItem {...producto} />
+          </div>
+          ))}
+        </div>
         {/* Mostramos el total y la cantidad total de productos en el carrito */}
         <Card.Text>Total: ${total}</Card.Text>
         <Card.Text>Cantidad Total: {cantidadTotal}</Card.Text>
@@ -39,7 +43,7 @@ export const Cart = () => {
           Eliminar Productos del Carrito
         </Button>
         {/* Enlace para ir a la página de checkout */}
-        <Link to="/checkout" className="btn btn-success">
+        <Link to="/checkout" className="m-2 btn btn-success">
           Finalizar Compra
         </Link>
       </Card.Body>
