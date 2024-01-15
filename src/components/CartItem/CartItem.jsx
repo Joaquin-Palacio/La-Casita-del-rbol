@@ -1,28 +1,36 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import PropTypes from 'prop-types';
+import { Card, Button } from 'react-bootstrap';
 
 export const CartItem = ({ item, cantidad }) => {
+  // Obtenemos la función 'deleteItem' del contexto
   const { deleteItem } = useContext(CartContext);
 
   return (
-    <div>
-      <h4>{item.nombre}</h4>
-      <img src={item.img} alt="imagen" />
-      <p>Cantidad: {cantidad}</p>
-      <p>Precio: {item.precio}</p>
-      <button onClick={() => deleteItem(item.id)}>Eliminar Producto</button>
-      <hr />
-    </div>
+    // Card de React-Bootstrap que muestra información del producto
+    <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        {/* Título del producto */}
+        <Card.Title>{item.nombre}</Card.Title>
+        {/* Cantidad y precio del producto */}
+        <Card.Text>Cantidad: {cantidad}</Card.Text>
+        <Card.Text>Precio: ${item.precio}</Card.Text>
+        {/* Botón para eliminar el producto del carrito */}
+        <Button variant="danger" onClick={() => deleteItem(item.id)}>
+          Eliminar Producto
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 
+// Propiedades requeridas para el componente CartItem
 CartItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
     precio: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
   }).isRequired,
   cantidad: PropTypes.number.isRequired,
 };

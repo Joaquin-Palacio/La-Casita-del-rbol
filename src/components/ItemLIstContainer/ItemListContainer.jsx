@@ -1,23 +1,40 @@
-import { useState, useEffect } from "react";
-import { getProductos, getCategory } from "../../asyncmock";
-import { ItemList } from "../ItemList/ItemList";
-import { useParams } from "react-router-dom";
-import "./ItemListContainer.css";
+import { useState, useEffect } from 'react';
+import { ItemList } from '../ItemList/ItemList';
+import { db } from '../../services/config';
+import { collection, getDocs, where, query } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
+import { Container, Row } from 'react-bootstrap';
+import './ItemListContainer.css';
 
 export const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const { idCategoria } = useParams();
 
   useEffect(() => {
-    const products = idCategoria ? getCategory : getProductos;
+    const allProductos = idCategoria
+      ? query(
+          collection(db, 'productos'),
+          where('categoria', '==', idCategoria)
+        )
+      : collection(db, 'productos');
 
-    products(idCategoria).then((res) => setProductos(res));
+    getDocs(allProductos)
+      .then((res) => {
+        const newProducts = res.docs.map((doc) => {
+          const data = doc.data();
+          return { id: doc.id, ...data };
+        });
+        setProductos(newProducts);
+      })
+      .catch((error) => console.log('Hubo un problema', error));
   }, [idCategoria]);
 
   return (
-    <div className="container">
+    <Container>
       <h2>Nuestros Productos</h2>
-      <ItemList productos={productos} />
-    </div>
+      <Row>
+        <ItemList productos={productos} />
+      </Row>
+    </Container>
   );
 };

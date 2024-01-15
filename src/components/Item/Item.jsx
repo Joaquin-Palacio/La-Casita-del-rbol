@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 import './Item.css';
 
 export const Item = ({ id, nombre, precio, img }) => {
