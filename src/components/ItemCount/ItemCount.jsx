@@ -1,6 +1,6 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import { Button, InputGroup, Container, Row } from "react-bootstrap";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Button, InputGroup, Container, Row } from 'react-bootstrap';
 
 export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
   const [contador, setContador] = useState(valorInicial);
@@ -30,11 +30,13 @@ export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
           </Button>
         </InputGroup>
       </Row>
-      <Row className="justify-content-center mt-4 mb-2">
-        <Button className="p-1 w-25" variant="success" onClick={() => addCarrito(contador)}>
-          Agregar al Carrito
-        </Button>
-      </Row>
+      <Button
+        className="m-3 p-1 w-25"
+        variant="success"
+        onClick={() => addCarrito(contador)}
+      >
+        Agregar al Carrito
+      </Button>
     </Container>
   );
 };

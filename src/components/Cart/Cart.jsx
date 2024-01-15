@@ -31,12 +31,12 @@ export const Cart = () => {
           {/* Mapeamos los productos en el carrito y renderizamos el componente CartItem */}
           {carrito.map((producto) => (
             <div key={producto.item.id} className="col m-1">
-            <CartItem {...producto} />
-          </div>
+              <CartItem {...producto} />
+            </div>
           ))}
         </div>
         {/* Mostramos el total y la cantidad total de productos en el carrito */}
-        <Card.Text>Total: ${total}</Card.Text>
+        <Card.Text className="mt-5">Total: ${total}</Card.Text>
         <Card.Text>Cantidad Total: {cantidadTotal}</Card.Text>
         {/* Botón para vaciar el carrito */}
         <Button variant="danger" onClick={() => cartEmpty()}>

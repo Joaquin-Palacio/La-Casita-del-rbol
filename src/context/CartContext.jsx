@@ -39,7 +39,10 @@ export const CartProvider = ({ children }) => {
 
     setCarrito(carritoActualizado);
     setCantidadTotal((prev) => prev - productoEliminado.cantidad);
-    setTotal((prev) => prev - productoEliminado.item.precio * productoEliminado.cantidad);
+    setTotal(
+      (prev) =>
+        prev - productoEliminado.item.precio * productoEliminado.cantidad
+    );
   };
 
   const cartEmpty = () => {

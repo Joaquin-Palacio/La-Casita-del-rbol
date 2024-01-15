@@ -1,6 +1,6 @@
-import { Item } from "../Item/Item";
-import PropTypes from "prop-types";
-import { Row, Col } from "react-bootstrap";
+import { Item } from '../Item/Item';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
 
 export const ItemList = ({ productos }) => {
   return (

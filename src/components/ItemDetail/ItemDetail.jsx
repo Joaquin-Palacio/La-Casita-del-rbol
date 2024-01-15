@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { ItemCount } from "../ItemCount/ItemCount";
+import { useState, useContext } from 'react';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { ItemCount } from '../ItemCount/ItemCount';
 import { CartContext } from '../../context/CartContext';
-import "./ItemDetail.css";
+import './ItemDetail.css';
 
 export const ItemDetail = ({ id, nombre, img, precio, stock }) => {
   const [addCantidad, setAddCantidad] = useState(0);
@@ -29,13 +29,13 @@ export const ItemDetail = ({ id, nombre, img, precio, stock }) => {
           aspernatur fugit quisquam? Iste modi, vel distinctio rem explicabo
           maxime.
         </Card.Text>
-        <Card.Text>
-          Unidades Disponibles: {stock}
-        </Card.Text>
+        <Card.Text>Unidades Disponibles: {stock}</Card.Text>
         <Card.Text>${precio}</Card.Text>
       </Card.Body>
       {addCantidad > 0 ? (
-        <Link to="/cart">Terminar compra</Link>
+        <Link to="/cart" className="btn btn-primary p-1">
+          Terminar compra
+        </Link>
       ) : (
         <ItemCount valorInicial={1} stock={stock} addCarrito={handleCantidad} />
       )}
@@ -43,7 +43,7 @@ export const ItemDetail = ({ id, nombre, img, precio, stock }) => {
   );
 };
 
-ItemDetail.propTypes = { 
+ItemDetail.propTypes = {
   id: PropTypes.string.isRequired,
   nombre: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { db } from '../../services/config';
 import { doc, updateDoc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 export const Checkout = () => {
   const { carrito, cartEmpty, total } = useContext(CartContext);
@@ -66,51 +67,69 @@ export const Checkout = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Checkout</h2>
-      <form onSubmit={handleSubmit}>
-        {carrito.map((producto) => {
-          <div key={producto.item.id}>
-            <p>
-              {producto.item.nombre} x {producto.cantidad}
-            </p>
-            <p>Precio: ${producto.item.precio}</p>
-            <hr />
-          </div>;
-        })}
 
-        <div>
-          <label htmlFor="">Nombre</label>
-          <input type="text" onChange={(e) => setNombre(e.target.value)} />
+      {carrito.map((producto) => (
+        <div key={producto.item.id}>
+          <p>
+            {producto.item.nombre} x {producto.cantidad}
+          </p>
+          <p>Precio: ${producto.item.precio}</p>
+          <hr />
         </div>
-        <div>
-          <label htmlFor="">Apellido</label>
-          <input type="text" onChange={(e) => setApellido(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="">Telefono</label>
-          <input type="text" onChange={(e) => setTelefono(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="">Email</label>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="">Email Confirmacion</label>
-          <input
+      ))}
+
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formNombre">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={(e) => setNombre(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formApellido">
+          <Form.Label>Apellido</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={(e) => setApellido(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formTelefono">
+          <Form.Label>Telefono</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={(e) => setTelefono(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formEmailConfirmado">
+          <Form.Label>Email Confirmacion</Form.Label>
+          <Form.Control
             type="email"
             onChange={(e) => setEmailConfirmado(e.target.value)}
           />
-        </div>
+        </Form.Group>
 
-        {error && <p style={{ color: 'red' }}> {error} </p>}
+        {error && <Alert variant="danger">{error}</Alert>}
 
-        <button type="submit">Finalizar Orden</button>
+        <Button className="mt-2" variant="primary" type="submit">
+          Finalizar Orden
+        </Button>
 
-        {ordenId &&
-          ((<strong>¡Gracias por su compra!</strong>),
-          (<p>Tu número de orden es: {ordenId} </p>))}
-      </form>
+        {ordenId && (
+          <>
+            <strong>¡Gracias por su compra!</strong>
+            <p>Tu número de orden es: {ordenId} </p>
+          </>
+        )}
+      </Form>
     </div>
   );
 };
