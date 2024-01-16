@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAMuz8t56F55ZVe9VVFCpo163v8e3hOx2I',
+  apiKey: import.meta.env.VITE_API_KEY_FIREBASE_CONFIG,
   authDomain: 'river-shop-91218.firebaseapp.com',
   projectId: 'river-shop-91218',
   storageBucket: 'river-shop-91218.appspot.com',
