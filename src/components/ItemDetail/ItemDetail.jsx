@@ -33,9 +33,14 @@ export const ItemDetail = ({ id, nombre, img, precio, stock }) => {
         <Card.Text>${precio}</Card.Text>
       </Card.Body>
       {addCantidad > 0 ? (
-        <Link to="/cart" className="btn btn-primary p-1">
-          Terminar compra
-        </Link>
+        <div>
+          <Link to="/cart" className="btn btn-primary m-2">
+            Terminar compra
+          </Link>
+          <Link to="/" className="btn btn-success m-2">
+            Ver más productos
+          </Link>
+        </div>
       ) : (
         <ItemCount valorInicial={1} stock={stock} addCarrito={handleCantidad} />
       )}

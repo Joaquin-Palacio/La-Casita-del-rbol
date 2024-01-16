@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 
 export const CartItem = ({ item, cantidad }) => {
-  // Obtenemos la función 'deleteItem' del contexto
+  // Obtenemos la función 'deleteItem' del context
   const { deleteItem } = useContext(CartContext);
 
   return (
     // Card de React-Bootstrap que muestra información del producto
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        {/* Título del producto */}
         <Card.Title>{item.nombre}</Card.Title>
-        {/* Cantidad y precio del producto */}
         <Card.Text>Cantidad: {cantidad}</Card.Text>
         <Card.Text>Precio: ${item.precio}</Card.Text>
         {/* Botón para eliminar el producto del carrito */}
