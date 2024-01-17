@@ -12,6 +12,7 @@ export const CartItem = ({ item, cantidad }) => {
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{item.nombre}</Card.Title>
+        <Card.Img className="imgCartItem" src={item.img} alt={item.nombre} />
         <Card.Text>Cantidad: {cantidad}</Card.Text>
         <Card.Text>Precio: ${item.precio}</Card.Text>
         {/* Botón para eliminar el producto del carrito */}
@@ -28,6 +29,7 @@ CartItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
     precio: PropTypes.number.isRequired,
   }).isRequired,
   cantidad: PropTypes.number.isRequired,

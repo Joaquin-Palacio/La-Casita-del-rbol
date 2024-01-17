@@ -5,6 +5,7 @@ import { db } from '../../services/config';
 import { doc, updateDoc, getDoc, addDoc, collection } from 'firebase/firestore';
 import { Form, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import './Checkout.css';
 
 // Componente funcional Checkout
 export const Checkout = () => {
@@ -139,15 +140,26 @@ export const Checkout = () => {
       <h2>Checkout</h2>
 
       {/* Mostrar los productos en el carrito */}
-      {carrito.map((producto) => (
-        <div key={producto.item.id}>
-          <p>
-            {producto.item.nombre} x {producto.cantidad}
-          </p>
-          <p>Precio: ${producto.item.precio}</p>
-          <hr />
-        </div>
-      ))}
+      <div className="d-flex flex-wrap">
+        {carrito.map((producto) => (
+          <div
+            key={producto.item.id}
+            className="card cardCheck rounded mx-2 mb-3"
+          >
+            <img
+              className="card-img-top img-checkout rounded"
+              src={producto.item.img}
+              alt={producto.item.nombre}
+            />
+            <div className="card-body">
+              <p className="card-text">
+                {producto.item.nombre} x {producto.cantidad}
+              </p>
+              <p className="card-text">Precio: ${producto.item.precio}</p>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {/* Formulario de datos del usuario */}
       <Form onSubmit={handleSubmit}>
