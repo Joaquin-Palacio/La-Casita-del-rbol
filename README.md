@@ -9,6 +9,8 @@ Es un e-commerce de ropa básico, realizado en el curso de React de Coderhouse.
 - Firebase
 - React router
 
+- Se agregó librería SweetAlert para mejorar un poco la experiencia de usuario
+
 ## Funcionalidades
 
 * El usuario podrá ver la lista de productos.
