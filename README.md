@@ -1,6 +1,6 @@
 # RIVER-SHOP
 
-e-commerce de ropa básico, realizado en el curso de React de Coderhouse.
+Es un e-commerce de ropa básico, realizado en el curso de React de Coderhouse.
 
 ## Tecnologías utilizadas
 
