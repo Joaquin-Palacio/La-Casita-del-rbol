@@ -21,6 +21,7 @@ ItemList.propTypes = {
       nombre: PropTypes.string.isRequired,
       precio: PropTypes.number.isRequired,
       img: PropTypes.string.isRequired,
+      descripcion: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
