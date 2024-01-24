@@ -65,7 +65,7 @@ export const Cart = () => {
           </Row>
           {/* Mostramos el total y la cantidad total de productos en el carrito */}
           <Card.Text className="mt-5">Total: ${total}</Card.Text>
-          <Card.Text>Cantidad Total: {cantidadTotal}</Card.Text>
+          <Card.Text>Productos: ({cantidadTotal})</Card.Text>
           {/* Botón para vaciar el carrito con SweetAlert */}
           <Button variant="danger" onClick={handleEmptyCart}>
             Eliminar Productos del Carrito
