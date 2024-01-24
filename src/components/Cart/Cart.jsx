@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { CartItem } from '../CartItem/CartItem';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
 
@@ -52,32 +52,34 @@ export const Cart = () => {
 
   // Si hay productos en el carrito, mostramos la lista y detalles del carrito
   return (
-    <Card className="container text-center mt-5">
-      <Card.Body>
-        <div className="row">
-          {/* Mapeamos los productos en el carrito y renderizamos el componente CartItem */}
-          {carrito.map((producto) => (
-            <div key={producto.item.id} className="col m-1">
-              <CartItem {...producto} />
-            </div>
-          ))}
-        </div>
-        {/* Mostramos el total y la cantidad total de productos en el carrito */}
-        <Card.Text className="mt-5">Total: ${total}</Card.Text>
-        <Card.Text>Cantidad Total: {cantidadTotal}</Card.Text>
-        {/* Botón para vaciar el carrito con SweetAlert */}
-        <Button variant="danger" onClick={handleEmptyCart}>
-          Eliminar Productos del Carrito
-        </Button>
-        {/* Enlace para ir al catálogo */}
-        <Link to="/" className="m-3 btn btn-primary">
-          Agregar más productos
-        </Link>
-        {/* Enlace para ir al checkout */}
-        <Link to="/checkout" className="m-2 btn btn-primary">
-          Finalizar Compra
-        </Link>
-      </Card.Body>
-    </Card>
+    <Container className='text-center'>
+      <Card>
+        <Card.Body>
+          <Row>
+            {/* Mapeamos los productos en el carrito y renderizamos el componente CartItem */}
+            {carrito.map((producto) => (
+              <Col key={producto.item.id} sm={6} md={4} lg={3}>
+                <CartItem {...producto} />
+              </Col>
+            ))}
+          </Row>
+          {/* Mostramos el total y la cantidad total de productos en el carrito */}
+          <Card.Text className="mt-5">Total: ${total}</Card.Text>
+          <Card.Text>Cantidad Total: {cantidadTotal}</Card.Text>
+          {/* Botón para vaciar el carrito con SweetAlert */}
+          <Button variant="danger" onClick={handleEmptyCart}>
+            Eliminar Productos del Carrito
+          </Button>
+          {/* Enlace para ir al catálogo */}
+          <Link to="/" className="m-2 btn btn-primary">
+            Agregar más productos
+          </Link>
+          {/* Enlace para ir al checkout */}
+          <Link to="/checkout" className="m-2 btn btn-primary">
+            Finalizar Compra
+          </Link>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
