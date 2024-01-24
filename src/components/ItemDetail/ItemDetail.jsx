@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ItemCount } from '../ItemCount/ItemCount';
@@ -19,27 +19,33 @@ export const ItemDetail = ({ id, nombre, img, precio, stock, descripcion }) => {
   };
 
   return (
-    <Card className="text-center cardDetail">
-      <Card.Body>
-        <Card.Title>{nombre}</Card.Title>
-        <Card.Img src={img} alt={nombre} />
-        <Card.Text>{descripcion}</Card.Text>
-        <Card.Text>Unidades Disponibles: {stock}</Card.Text>
-        <Card.Text>${precio}</Card.Text>
-      </Card.Body>
-      {addCantidad > 0 ? (
-        <div>
-          <Link to="/cart" className="btn btn-primary m-2">
-            Terminar compra
-          </Link>
-          <Link to="/" className="btn btn-success m-2">
-            Ver más productos
-          </Link>
-        </div>
-      ) : (
-        <ItemCount valorInicial={1} stock={stock} addCarrito={handleCantidad} />
-      )}
-    </Card>
+    <Container className="text-center">
+      <Card className="cardDetail">
+        <Card.Body>
+          <Card.Title>{nombre}</Card.Title>
+          <Card.Img src={img} alt={nombre} />
+          <Card.Text>{descripcion}</Card.Text>
+          <Card.Text>Unidades Disponibles: {stock}</Card.Text>
+          <Card.Text>${precio}</Card.Text>
+        </Card.Body>
+        {addCantidad > 0 ? (
+          <div>
+            <Link to="/cart" className="btn btn-primary m-2">
+              Terminar compra
+            </Link>
+            <Link to="/" className="btn btn-success m-2">
+              Ver más productos
+            </Link>
+          </div>
+        ) : (
+          <ItemCount
+            valorInicial={1}
+            stock={stock}
+            addCarrito={handleCantidad}
+          />
+        )}
+      </Card>
+    </Container>
   );
 };
 

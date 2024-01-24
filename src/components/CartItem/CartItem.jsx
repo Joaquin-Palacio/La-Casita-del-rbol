@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
+import './CartItem.css';
 
 export const CartItem = ({ item, cantidad }) => {
   // Obtenemos la función 'deleteItem' del context
@@ -9,9 +10,9 @@ export const CartItem = ({ item, cantidad }) => {
 
   return (
     // Card de React-Bootstrap que muestra información del producto
-    <Card style={{ width: '18rem' }}>
+    <Card>
       <Card.Body>
-        <Card.Title>{item.nombre}</Card.Title>
+        <Card.Title className='cartItem-title'>{item.nombre}</Card.Title>
         <Card.Img className="imgCartItem" src={item.img} alt={item.nombre} />
         <Card.Text>Cantidad: {cantidad}</Card.Text>
         <Card.Text>Precio: ${item.precio}</Card.Text>
