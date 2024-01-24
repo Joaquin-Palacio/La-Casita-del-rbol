@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { db } from '../../services/config';
 import { doc, updateDoc, getDoc, addDoc, collection } from 'firebase/firestore';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import './Checkout.css';
 
@@ -23,6 +23,16 @@ export const Checkout = () => {
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (carrito.length === 0) {
+      // Muestra SweetAlert de error para carrito vacío
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No hay productos en tu carrito. Agrega productos antes de realizar la orden.',
+      });
+      return;
+    }
 
     // Validación del formulario
     if (!nombre || !apellido || !telefono || !email || !emailConfirmado) {
@@ -127,7 +137,7 @@ export const Checkout = () => {
         // Muestra un mensaje al limpiar el carrito
         Swal.fire({
           icon: 'success',
-          title: 'Carrito limpio',
+          title: 'Carrito Vacío',
           text: 'Los productos fueron borrados de tu carrito.',
         });
       }
@@ -136,7 +146,7 @@ export const Checkout = () => {
 
   // Renderizado del componente Checkout
   return (
-    <div className="container">
+    <Container>
       <h2>Checkout</h2>
 
       {/* Mostrar los productos en el carrito */}
@@ -162,6 +172,7 @@ export const Checkout = () => {
       </div>
 
       {/* Formulario de datos del usuario */}
+
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formNombre">
           <Form.Label>Nombre</Form.Label>
@@ -212,6 +223,6 @@ export const Checkout = () => {
           Vaciar Carrito
         </Button>
       </Form>
-    </div>
+    </Container>
   );
 };
