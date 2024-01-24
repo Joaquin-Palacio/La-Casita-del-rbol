@@ -26,7 +26,7 @@ export const ItemDetail = ({ id, nombre, img, precio, stock, descripcion }) => {
           <Card.Img src={img} alt={nombre} />
           <Card.Text>{descripcion}</Card.Text>
           <Card.Text>Unidades Disponibles: {stock}</Card.Text>
-          <Card.Text>${precio}</Card.Text>
+          <Card.Text className='detail-precio'>${precio}</Card.Text>
         </Card.Body>
         {addCantidad > 0 ? (
           <div>

@@ -29,7 +29,7 @@ export const Cart = () => {
         // Muestra SweetAlert de éxito al vaciar el carrito
         Swal.fire({
           icon: 'success',
-          title: 'Carrito vaciado',
+          title: 'Carrito vacío',
         });
       }
     });
