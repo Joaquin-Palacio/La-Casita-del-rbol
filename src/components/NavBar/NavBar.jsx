@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { CartWidget } from '../CartWidget/CartWidget';
 import './NavBar.css';
+import { Authentication } from '../Authentication/Authentication';
 
 export const NavBar = () => {
   return (
@@ -29,6 +30,7 @@ export const NavBar = () => {
           <CartWidget />
         </Navbar.Collapse>
       </Container>
+      <Authentication />
     </Navbar>
   );
 };
