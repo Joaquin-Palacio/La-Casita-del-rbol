@@ -10,7 +10,7 @@ export const CartWidget = () => {
   const { cantidadTotal } = useContext(CartContext);
 
   return (
-    <div>
+    <div className='m-2'>
       <Link to="/cart" className="cart-link">
         <FaShoppingCart className="cartIcon" />
         {/* Muestra un Badge con la cantidad total solo si la cantidad es mayor que cero. */}
