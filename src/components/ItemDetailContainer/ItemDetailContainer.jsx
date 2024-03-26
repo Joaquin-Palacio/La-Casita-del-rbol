@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
 import { ItemDetail } from '../ItemDetail/ItemDetail';
 import { useParams } from 'react-router-dom';
 import { db } from '../../services/config';
@@ -20,5 +19,7 @@ export const ItemDetailContainer = () => {
       .catch((error) => console.log('Hubo un error', error));
   }, [idItem]);
 
-  return <Container>{producto && <ItemDetail {...producto} />}</Container>;
+  return (
+    <div className="container">{producto && <ItemDetail {...producto} />}</div>
+  );
 };

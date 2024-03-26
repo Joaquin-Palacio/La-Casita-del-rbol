@@ -1,9 +1,14 @@
 import { useState, useContext } from 'react';
-import { Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// Importación del componente ItemCount
 import { ItemCount } from '../ItemCount/ItemCount';
+
+// Importación del contexto CartContext
 import { CartContext } from '../../context/CartContext';
+
+// Importación del archivo de estilos para el componente ItemDetail
 import './ItemDetail.css';
 
 export const ItemDetail = ({ id, nombre, img, precio, stock, descripcion }) => {
@@ -19,33 +24,49 @@ export const ItemDetail = ({ id, nombre, img, precio, stock, descripcion }) => {
   };
 
   return (
-    <Container className="text-center">
-      <Card className="cardDetail">
-        <Card.Body>
-          <Card.Title>{nombre}</Card.Title>
-          <Card.Img src={img} alt={nombre} />
-          <Card.Text>{descripcion}</Card.Text>
-          <Card.Text>Unidades Disponibles: {stock}</Card.Text>
-          <Card.Text className='detail-precio'>${precio}</Card.Text>
-        </Card.Body>
-        {addCantidad > 0 ? (
-          <div>
-            <Link to="/cart" className="btn btn-primary m-2">
-              Terminar compra
-            </Link>
-            <Link to="/" className="btn btn-success m-2">
-              Ver más productos
-            </Link>
+    <div className="container text-center">
+      <div className="card cardDetail">
+        <div className="card-body">
+          <h5 className="card-title mb-5">{nombre}</h5>
+          <div className="row">
+            <div className="col-md-6 mb-4 mb-md-0">
+              <img src={img} alt={nombre} className="img-fluid" />
+            </div>
+            <div className="col-md-6">
+              <p className="card-text mt-5 mb-5 descProduct">{descripcion}</p>
+              <div className="mb-5">
+                <p className="card-text mb-3">
+                  <strong>Unidades Disponibles:</strong> {stock}
+                </p>
+                <p className="card-text">
+                  <strong>Precio:</strong> ${precio}
+                </p>
+              </div>
+            </div>
           </div>
-        ) : (
-          <ItemCount
-            valorInicial={1}
-            stock={stock}
-            addCarrito={handleCantidad}
-          />
-        )}
-      </Card>
-    </Container>
+        </div>
+        <div>
+          {addCantidad > 0 ? (
+            <div className="mt-3">
+              <Link to="/cart" className="btn btn-primary m-2">
+                Terminar compra
+              </Link>
+              <Link to="/" className="btn btn-success m-2">
+                Ver más productos
+              </Link>
+            </div>
+          ) : (
+            <div className="mt-3">
+              <ItemCount
+                valorInicial={1}
+                stock={stock}
+                addCarrito={handleCantidad}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

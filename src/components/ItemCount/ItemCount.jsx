@@ -5,7 +5,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Importación de componentes de Bootstrap (Button, InputGroup, Container, Row)
-import { Button, InputGroup, Container, Row } from 'react-bootstrap';
+import { Button, InputGroup } from 'react-bootstrap';
 
 // Definición del componente funcional ItemCount
 export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
@@ -28,8 +28,8 @@ export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
 
   // Renderizado del componente
   return (
-    <Container>
-      <Row>
+    <div className='container'>
+      <div className='row'>
         {/* Grupo de entrada (InputGroup) para mostrar el contador y botones de incremento/decremento */}
         <InputGroup className="justify-content-center">
           <Button variant="outline-primary" onClick={handleResta}>
@@ -40,7 +40,7 @@ export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
             +
           </Button>
         </InputGroup>
-      </Row>
+      </div>
       {/* Botón para agregar al carrito con la cantidad seleccionada */}
       <Button
         className="m-3 p-1 w-25"
@@ -49,7 +49,7 @@ export const ItemCount = ({ valorInicial, stock, addCarrito }) => {
       >
         Agregar al Carrito
       </Button>
-    </Container>
+    </div>
   );
 };
 

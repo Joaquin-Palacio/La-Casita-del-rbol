@@ -1,9 +1,21 @@
-.cardDetail img {
-    width: 400px;
-    margin: 10px;
+@media (max-width: 1199.98px) {
+    .cardDetail img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px;
+    }
 }
 
-.detail-precio {
-    font-weight: bolder;
-    font-size: 1.3rem;
+/* Para pantallas con ancho igual o mayor a 1200px */
+@media (min-width: 1200px) {
+    .cardDetail img {
+        width: 427px;
+        height: 427px;
+        margin: 10px;
+    }
+}
+
+.descProduct {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
