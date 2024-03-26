@@ -1,8 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { CartWidget } from '../CartWidget/CartWidget';
-import './NavBar.css';
 import { Authentication } from '../Authentication/Authentication';
+import './NavBar.css';
 
 export const NavBar = () => {
   return (
@@ -28,9 +28,9 @@ export const NavBar = () => {
             </Nav.Link>
           </Nav>
           <CartWidget />
+          <Authentication />
         </Navbar.Collapse>
       </Container>
-      <Authentication />
     </Navbar>
   );
 };
