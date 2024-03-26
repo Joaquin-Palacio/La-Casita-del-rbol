@@ -1,16 +1,15 @@
 import { Item } from '../Item/Item';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 
 export const ItemList = ({ productos }) => {
   return (
-    <Row>
+    <div className="row">
       {productos.map((producto) => (
-        <Col key={producto.id} sm={6} md={4} lg={3}>
+        <div key={producto.id} className="col-12 col-sm-6 col-lg-3 col-md-4">
           <Item {...producto} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 

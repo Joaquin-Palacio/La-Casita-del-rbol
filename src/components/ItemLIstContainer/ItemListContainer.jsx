@@ -3,7 +3,6 @@ import { ItemList } from '../ItemList/ItemList';
 import { db } from '../../services/config';
 import { collection, getDocs, where, query } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
 import './ItemListContainer.css';
 
 export const ItemListContainer = () => {
@@ -30,11 +29,11 @@ export const ItemListContainer = () => {
   }, [idCategoria]);
 
   return (
-    <Container>
+    <div className="container">
       <h2>Nuestros Productos</h2>
-      <Row>
+      <div className="row">
         <ItemList productos={productos} />
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
 };

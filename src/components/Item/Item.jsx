@@ -1,31 +1,29 @@
-// Importación de PropTypes para la validación de tipos de propiedades
 import PropTypes from 'prop-types';
-
-// Importación de Link para la navegación a través de react-router-dom
 import { Link } from 'react-router-dom';
-
-// Importación de componentes de Bootstrap (Card y Button)
-import { Card, Button } from 'react-bootstrap';
-
-// Importación del archivo de estilos para el componente Item
 import './Item.css';
 
-// Definición del componente funcional Item
 export const Item = ({ id, nombre, precio, img }) => {
-  // Renderizado de la tarjeta (Card) para mostrar información del producto
   return (
-    <Card className="text-center cardItem">
-      <Card.Img variant="top" src={img} alt="imagen producto" />
-      <Card.Body>
-        <Card.Title>{nombre}</Card.Title>
-        <Card.Text>${precio}</Card.Text>
+    <div className="card text-center m-1 cardItem">
+      <img className="img-fluid" src={img} alt="imagen producto" />
+      <div className="card-body">
+        <h5 className="card-title">{nombre}</h5>
+        <p className="card-text">${precio}</p>
         {/* Botón que actúa como Link a la página de detalles del producto */}
-        <Button as={Link} to={`/item/${id}`} variant="primary">
+        <Link to={`/item/${id}`} className="btn btn-primary">
           Ver Detalles
-        </Button>
-      </Card.Body>
-    </Card>
+        </Link>
+      </div>
+    </div>
   );
+};
+
+// Definición de los tipos de propiedades esperadas por el componente Item
+Item.propTypes = {
+  id: PropTypes.number.isRequired,
+  nombre: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
+  img: PropTypes.string.isRequired,
 };
 
 // Definición de propTypes para validar las propiedades recibidas
