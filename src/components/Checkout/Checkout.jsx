@@ -1,18 +1,14 @@
-// Importación de React y otras dependencias
 import { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { db } from '../../services/config';
 import { doc, updateDoc, getDoc, addDoc, collection } from 'firebase/firestore';
-import { Form, Button, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import { Button } from 'react-bootstrap';
 import './Checkout.css';
 
-// Componente funcional Checkout
 export const Checkout = () => {
-  // Utilizando el contexto del carrito
   const { carrito, cartEmpty, total } = useContext(CartContext);
 
-  // Estados para manejar los datos del formulario
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -20,12 +16,10 @@ export const Checkout = () => {
   const [emailConfirmado, setEmailConfirmado] = useState('');
   const [ordenId, setOrdenId] = useState('');
 
-  // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (carrito.length === 0) {
-      // Muestra SweetAlert de error para carrito vacío
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -34,9 +28,7 @@ export const Checkout = () => {
       return;
     }
 
-    // Validación del formulario
     if (!nombre || !apellido || !telefono || !email || !emailConfirmado) {
-      // Muestra SweetAlert de error para campos vacíos
       Swal.fire({
         icon: 'error',
         title: 'Error de validación',
@@ -46,7 +38,6 @@ export const Checkout = () => {
     }
 
     if (email !== emailConfirmado) {
-      // Muestra SweetAlert de error para emails que no coinciden
       Swal.fire({
         icon: 'error',
         title: 'Error de validación',
@@ -55,7 +46,6 @@ export const Checkout = () => {
       return;
     }
 
-    // Construcción del objeto orden con los datos del formulario y productos del carrito
     const orden = {
       items: carrito.map((producto) => ({
         id: producto.item.id,
@@ -70,7 +60,6 @@ export const Checkout = () => {
       email,
     };
 
-    // Actualización del stock en la base de datos para cada producto del carrito
     Promise.all(
       orden.items.map(async (productoOrden) => {
         const productoRef = doc(db, 'productos', productoOrden.id);
@@ -83,13 +72,11 @@ export const Checkout = () => {
       })
     )
       .then(() => {
-        // Agregar la orden a la colección 'ordenes' en la base de datos
         addDoc(collection(db, 'ordenes'), orden)
           .then((docRef) => {
             setOrdenId(docRef.id);
             cartEmpty();
 
-            // Muestra SweetAlert de éxito
             Swal.fire({
               icon: 'success',
               title: '¡Gracias por tu compra!',
@@ -98,8 +85,6 @@ export const Checkout = () => {
           })
           .catch((error) => {
             console.log('Error al crear la orden', error);
-
-            // Muestra SweetAlert de error al crear la orden
             Swal.fire({
               icon: 'error',
               title: 'Error',
@@ -109,8 +94,6 @@ export const Checkout = () => {
       })
       .catch((error) => {
         console.log('No se pudo actualizar el stock', error);
-
-        // Muestra SweetAlert de error al actualizar el stock
         Swal.fire({
           icon: 'error',
           title: 'Error',
@@ -119,7 +102,6 @@ export const Checkout = () => {
       });
   };
 
-  // Función para limpiar el carrito con confirmación
   const handleClearCart = () => {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -134,7 +116,6 @@ export const Checkout = () => {
       if (result.isConfirmed) {
         cartEmpty();
 
-        // Muestra un mensaje al limpiar el carrito
         Swal.fire({
           icon: 'success',
           title: 'Carrito Vacío',
@@ -144,85 +125,131 @@ export const Checkout = () => {
     });
   };
 
-  // Renderizado del componente Checkout
   return (
-    <Container>
-      <h2>Checkout</h2>
-
-      {/* Mostrar los productos en el carrito */}
-      <div className="d-flex flex-wrap">
-        {carrito.map((producto) => (
-          <div
-            key={producto.item.id}
-            className="card cardCheck rounded mx-2 mb-3"
-          >
-            <img
-              className="card-img-top img-checkout rounded"
-              src={producto.item.img}
-              alt={producto.item.nombre}
-            />
+    <div className="container checkout-container">
+      <h2 className="text-center mb-4">Checkout</h2>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card mb-4">
             <div className="card-body">
-              <p className="card-text">
-                {producto.item.nombre} x {producto.cantidad}
-              </p>
-              <p className="card-text">Precio: ${producto.item.precio}</p>
+              <h5 className="card-title">Productos en el Carrito</h5>
+              {carrito.map((producto) => (
+                <div key={producto.item.id} className="row mb-2">
+                  <div className="col-4">
+                    <img
+                      src={producto.item.img}
+                      alt={producto.item.nombre}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="col-8">
+                    <p className="mb-1">{producto.item.nombre}</p>
+                    <p className="mb-0">Cantidad: {producto.cantidad}</p>
+                    <p className="mb-0">Precio: ${producto.item.precio}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
+        <div className="col-md-6">
+          <div className="card mb-4">
+            <div className="card-body">
+              <h5 className="card-title">Información del Cliente</h5>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="nombre" className="form-label">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="apellido" className="form-label">
+                    Apellido
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="apellido"
+                    value={apellido}
+                    onChange={(e) => setApellido(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="telefono" className="form-label">
+                    Teléfono
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="telefono"
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Correo Electrónico
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="emailConfirmado" className="form-label">
+                    Confirmar Correo Electrónico
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="emailConfirmado"
+                    value={emailConfirmado}
+                    onChange={(e) => setEmailConfirmado(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="d-grid gap-2">
+                  <Button type="submit" variant="primary">
+                    Finalizar Orden
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">
+                <strong>Resumen</strong>
+              </h5>
+              <p className="card-text mb-0">
+                Productos: <strong>{carrito.length}</strong>
+              </p>
+              <p className="card-text">
+                <strong>Total: ${total}</strong>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Formulario de datos del usuario */}
-
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formNombre">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(e) => setNombre(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formApellido">
-          <Form.Label>Apellido</Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(e) => setApellido(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formTelefono">
-          <Form.Label>Telefono</Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(e) => setTelefono(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formEmailConfirmado">
-          <Form.Label>Email Confirmacion</Form.Label>
-          <Form.Control
-            type="email"
-            onChange={(e) => setEmailConfirmado(e.target.value)}
-          />
-        </Form.Group>
-
-        {/* Botones para finalizar orden y vaciar carrito */}
-        <Button className="m-2" variant="primary" type="submit">
-          Finalizar Orden
-        </Button>
-
-        <Button className="m-2" variant="danger" onClick={handleClearCart}>
+      <div className="d-grid gap-2 m-2">
+        <Button variant="danger" onClick={handleClearCart}>
           Vaciar Carrito
         </Button>
-      </Form>
-    </Container>
+      </div>
+    </div>
   );
 };
