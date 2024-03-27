@@ -1,27 +1,50 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
+import swal from 'sweetalert2';
 import './CartItem.css';
 
 export const CartItem = ({ item, cantidad }) => {
   // Obtenemos la función 'deleteItem' del context
   const { deleteItem } = useContext(CartContext);
 
+  // Función para eliminar el producto con SweetAlert
+  const handleDeleteItem = () => {
+    swal
+      .fire({
+        title: `¿Estás seguro de que deseas eliminar ${item.nombre} del carrito?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          deleteItem(item.id);
+        }
+      });
+  };
+
   return (
-    // Card de React-Bootstrap que muestra información del producto
-    <Card>
-      <Card.Body>
-        <Card.Title className='cartItem-title'>{item.nombre}</Card.Title>
-        <Card.Img className="imgCartItem" src={item.img} alt={item.nombre} />
-        <Card.Text>Cantidad: {cantidad}</Card.Text>
-        <Card.Text>Precio: ${item.precio}</Card.Text>
+    // Card simple para mostrar información del producto
+    <div className="card cartItem m-1">
+      <img
+        className="card-img-top imgCartItem img-fluid"
+        src={item.img}
+        alt={item.nombre}
+      />
+      <div className="card-body">
+        <h5 className="card-title cartItem-title">{item.nombre}</h5>
+        <p className="card-text">Cantidad: {cantidad}</p>
+        <p className="card-text">Precio: ${item.precio}</p>
         {/* Botón para eliminar el producto del carrito */}
-        <Button variant="danger" onClick={() => deleteItem(item.id)}>
+        <button className="btn btn-danger" onClick={handleDeleteItem}>
           Eliminar Producto
-        </Button>
-      </Card.Body>
-    </Card>
+        </button>
+      </div>
+    </div>
   );
 };
 

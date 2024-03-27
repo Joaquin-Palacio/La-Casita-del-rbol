@@ -1,5 +1,5 @@
 .cartItem-title {
-    max-width: 3000px; /* Ajusta el valor según tus necesidades */
+    max-width: 3000px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
