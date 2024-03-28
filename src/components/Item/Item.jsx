@@ -25,11 +25,3 @@ Item.propTypes = {
   precio: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
 };
-
-// Definición de propTypes para validar las propiedades recibidas
-Item.propTypes = {
-  id: PropTypes.string.isRequired,
-  nombre: PropTypes.string.isRequired,
-  precio: PropTypes.number.isRequired,
-  img: PropTypes.string.isRequired,
-};
