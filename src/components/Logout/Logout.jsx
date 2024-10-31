@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/* import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Dropdown } from 'react-bootstrap';
 import { FaUser, FaSignOutAlt, FaHeart, FaShoppingCart } from 'react-icons/fa';
@@ -35,3 +35,4 @@ export const Logout = () => {
     </Dropdown>
   );
 };
+ */

@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { CartWidget } from '../CartWidget/CartWidget';
-import { Authentication } from '../Authentication/Authentication';
+/* import { Authentication } from '../Authentication/Authentication'; */
 import './NavBar.css';
 
 export const NavBar = () => {
@@ -9,26 +9,23 @@ export const NavBar = () => {
     <Navbar expand="lg" bg="dark" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          River-Shop
+          La Casita del Árbol
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/categoria/camisetas">
-              Camisetas
+            <Nav.Link as={NavLink} to="/productos">
+              Productos
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/categoria/camperas">
-              Camperas
+            <Nav.Link as={NavLink} to="/sobrenosotros">
+              Sobre Nosotros
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/categoria/buzos">
-              Buzos
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/categoria/pantalones">
-              Pantalones
-            </Nav.Link>
+            <Nav.Link as={NavLink} to="/contacto">
+              Contacto
+            </Nav.Link>        
           </Nav>
           <CartWidget />
-          <Authentication />
+          {/* <Authentication /> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

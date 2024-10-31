@@ -1,4 +1,4 @@
-import { useAuth0 } from '@auth0/auth0-react';
+/* import { useAuth0 } from '@auth0/auth0-react';
 import { Login } from '../Login/Login';
 import { Logout } from '../Logout/Logout';
 import { Profile } from '../Profile/Profile';
@@ -21,4 +21,4 @@ export const Authentication = () => {
       )}
     </div>
   );
-};
+}; */
